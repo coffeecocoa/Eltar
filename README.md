@@ -7,6 +7,7 @@ To start your Phoenix server:
   * Install Node.js dependencies with `cd assets && npm install`
   * Start Phoenix endpoint with `mix phx.server`
   * Setup Github Oauth id and secret in config.exs
+  * Upgrade growl to version 1.10.0 or later 
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
