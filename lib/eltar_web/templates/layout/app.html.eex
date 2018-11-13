@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><%= @page_title %></title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+
+    <script>
+      <%= if @conn.assigns.user do %>
+        
+        window.userToken = "<%= assigns[:user_token] %>";
+        
+      <% end %>
+
+    </script>
+  </head>
+
+  <body>
+   
+      <div class="container" >          
+          <nav aria-label="breadcrumb" style="margin-bottom: 0px;">
+            
+            <ol class="breadcrumb text-right" style="background-color: #ffffff">
+
+              <li class="breadcrumb-item pull-left">
+                <a class="navbar-brand" href="/" style="padding: 0px;">Eltar</a> 
+              </li>
+            
+              <li><%= link "News", to: link_path(@conn, :index) %> </li>
+
+           <!--   <li><a href="#">Discuss</a></li> -->
+              
+              <%= if @conn.assigns[:user] do %>
+                  <li><%= link "Submit", to: link_path(@conn, :new) %> </li>
+                    <li>
+                      <a href="/@<%= @conn.assigns[:user].id %>"><img src="<%= @conn.assigns[:user].avatar %>" class="avatar"/></a>
+                    </li>
+                    
+                    <li>
+                       <%= link "logout", to: auth_path(@conn, :signout) %> 
+                    </li>
+              <% else %>
+                    <li>
+                      <%= link "Sign in(Github)", to: auth_path(@conn, :request, "github") %>
+                    </li>
+              <% end %>
+            </ol>
+          </nav>
+    </div>
+    <div class="container" >
+      <div class="panel panel-default">
+        
+        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+        <main role="main">
+            <%= render @view_module, @view_template, assigns %>
+        </main>
+        
+      </div>
+    </div> <!-- /container -->
+
+    <footer class="container">
+      <div class="panel panel-default">
+        <div class="row no-gutters">
+       
+          
+            <div class="col-12 col-sm-6 col-md-8" style="padding-left: 20px;">
+              Copyright © 2018 <a href="/">Eltar</a>  All Rights Reserved
+            </div>
+            <div class="col-6 col-md-4" >
+              <span class="pull-right" style="padding-right: 10px;"><a href="#" target="_blank">contact</a></span>
+            </div>
+          
+        
+        </div>
+      </div>
+    </footer>
+
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

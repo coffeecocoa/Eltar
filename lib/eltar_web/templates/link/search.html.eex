@@ -1,0 +1,47 @@
+<div class="panel-body">
+
+<table class="table">
+
+<thead>
+  <div class="form-group row form-inline">
+    <div class="col-xs-4" style="width: auto;">
+     <%= form_for @conn, link_path(@conn, :search), [method: :get], fn f -> %>
+        <%= search_input f, :query,  class: "form-control", placeholder: "Search" %>
+        </div>
+        <div class="col-xs-2" style="padding-left: 0px;">
+        <%= submit "Go", to: link_path(@conn, :search) , class: "btn btn-outline-success my-2 my-sm-0"  %>
+      <% end %>
+    </div>
+  </div>
+</thead>
+ 
+  <tbody>
+    <%= for link <- @links do %>
+        <tr>
+          <td>
+            <b><a href="<%= link.url %>" target="_blank"><%= link.title %></a></b>
+            <br>
+            by <a href="/@<%= link.user.id %>" ><%= link.user.login %></a> <%= link.inserted_at|> seconds_ago() |> time_ago_in_words() %>
+          
+            <span>
+              <%= link "Show", to: link_path(@conn, :show, link) , class: "btn btn-default btn-xs"%> 
+            </span>
+
+            <%= if @conn.assigns.user && @conn.assigns.user.id == link.user_id do %>
+
+              <span>
+                <%= link "Edit", to: link_path(@conn, :edit, link), class: "btn btn-default btn-xs"%> 
+              </span>
+              <span>
+                <%= link "Delete", to: link_path(@conn, :delete, link), method: :delete, data: [confirm: "Are you sure?"],class: "btn btn-default btn-xs"%>
+              </span>
+            <% end %>
+          </td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= pagination_links @page, query: @query%>
+
+</div>

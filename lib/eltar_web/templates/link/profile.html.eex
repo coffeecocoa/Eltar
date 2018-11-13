@@ -1,0 +1,12 @@
+<div class="panel-body">
+	<p>
+	<img src="<%= @link.user.avatar %>" class="avatar" style="width: 8em;"/>
+	</p>
+	<div>
+	<span>name: <%= @link.user.login %></span>
+	<br>
+	link: <a href="https://<%= @link.user.provider %>.com/<%= @link.user.login %>" target="_blank"><%= @link.user.provider %></a>
+	</div>
+	<br>
+	<span><%= link "Back", to: link_path(@conn, :index), class: "btn btn-default btn-xs" %></span>
+</div>

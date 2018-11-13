@@ -1,0 +1,23 @@
+<div class="panel-body">
+	<p>
+	<h4><%= @link.title %></h4>
+	  by <a href="/@<%= @link.user.id %>" ><%= @link.user.login %></a> <%= @link.inserted_at|> seconds_ago() |> time_ago_in_words() %> 
+	</p>
+
+	<p>
+	    <%= @link.description %>
+	</p>
+	<br>
+
+	<%= link "Check", to: @link.url, class: "btn btn-primary", target: "_blank" %>     
+
+	<br>
+	<br>
+
+	<%= if @conn.assigns.user && @conn.assigns.user.id == @link.user_id do %>
+	  <span><%= link "Edit", to: link_path(@conn, :edit, @link) , class: "btn btn-default btn-xs"%></span>
+	<% end %>
+
+	<span><%= link "Back", to: link_path(@conn, :index), class: "btn btn-default btn-xs" %></span>
+
+</div>

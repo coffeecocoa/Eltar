@@ -1,0 +1,23 @@
+/* This file is for your main application css. */
+.avatar {
+    width: 2.5em;
+}
+.help-block {
+    color: red;
+    text-transform: capitalize;
+    position: absolute;
+    top: 42px;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+input {
+	text-align: center;
+}
+
+body { 
+	background: cyan !important; 
+}
