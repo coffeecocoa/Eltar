@@ -16,6 +16,9 @@
 
 	<%= if @conn.assigns.user && @conn.assigns.user.id == @link.user_id do %>
 	  <span><%= link "Edit", to: link_path(@conn, :edit, @link) , class: "btn btn-default btn-xs"%></span>
+	  <span>
+	    <%= link "Delete", to: link_path(@conn, :delete, @link), method: :delete, data: [confirm: "Are you sure?"],class: "btn btn-default btn-xs"%>
+	  </span>		  
 	<% end %>
 
 	<span><%= link "Back", to: link_path(@conn, :index), class: "btn btn-default btn-xs" %></span>
